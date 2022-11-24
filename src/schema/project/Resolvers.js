@@ -28,7 +28,7 @@ const addProject = {
 	args: {
 		name: { type: GraphQLNonNull(GraphQLString) },
 		description: { type: GraphQLNonNull(GraphQLString) },
-		link: { type: GraphQLNonNull(GraphQLString) },
+		link: { type: GraphQLString },
 		status: {
 			type: new GraphQLEnumType({
 				name: 'ProjectStatus',
@@ -62,7 +62,7 @@ const updateProject = {
 		id: { type: GraphQLNonNull(GraphQLID) },
 		name: { type: GraphQLNonNull(GraphQLString) },
 		description: { type: GraphQLNonNull(GraphQLString) },
-		link: { type: GraphQLNonNull(GraphQLString) },
+		link: { type: GraphQLString },
 		status: {
 			type: new GraphQLEnumType({
 				name: 'ProjectStatusUpdate',
@@ -73,6 +73,20 @@ const updateProject = {
 				},
 			}),
 		},
+	},
+	resolve(parent, args) {
+		return Project.findByIdAndUpdate(
+			args.id,
+			{
+				$set: {
+					name: args.name,
+					description: args.description,
+					link: args.link,
+					status: args.status,
+				},
+			},
+			{ new: true }
+		)
 	},
 }
 
