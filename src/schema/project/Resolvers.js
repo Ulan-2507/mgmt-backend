@@ -5,11 +5,11 @@ const {
 	GraphQLNonNull,
 	GraphQLEnumType,
 } = require('graphql')
-const Project = require('../../models/Project.js')
-const ProjectType = require('./TypeDefs.js')
+const Project = require('../../models/Project')
+const ProjectType = require('./TypeDefs')
 
 const projects = {
-	type: ProjectType,
+	type: GraphQLList(ProjectType),
 	resolve(parent, args) {
 		return Project.find()
 	},
