@@ -6,12 +6,21 @@ const {
 	updateClient,
 	deleteClient,
 } = require('./client/Resolvers')
+const {
+	projects,
+	project,
+	addProject,
+	updateProject,
+	deleteProject,
+} = require('./project/Resolvers')
 
 const query = new GraphQLObjectType({
 	name: 'Query',
 	fields: {
 		clients,
 		client,
+		projects,
+		project,
 	},
 })
 
@@ -21,6 +30,9 @@ const mutation = new GraphQLObjectType({
 		addClient,
 		updateClient,
 		deleteClient,
+		addProject,
+		updateProject,
+		deleteProject,
 	},
 })
 
