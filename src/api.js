@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 	})
 })
 
-app.use(`/api`, router)
+app.use(`/`, router)
 
 module.exports = app
 module.exports.handler = serverless(app)
